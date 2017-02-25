@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск контактов</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script><!--Подключаем саму библиотеку react-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script><!--Подключаем библиотеку react DOM - которая ответственна за взаимодействие с DOM деревом-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script><!--Подключаем библиотеку react с бабл трасформером для браузера, который уже умееет понимать то что мы будем писать и преобразует ето вссе в чистый ванильныйй JS который бедет понятен нашей странице-->
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        var CONTACTS =[
+        {
+            id: 1,
+            name: "Dart Vader",
+            phoneNumber: '+22502522542',
+            image: 'http://scary-x.ru/images/stories/april/dartweider.jpg'
+        },{
+            id: 2,
+            name: 'Princess Leia',
+            phoneNumber: '+76864545653',
+            image: 'http://lamcdn.net/lookatme.ru/post_image-image/aIiT1uDuwTv_pji74OyhYA-article.jpg'
+        },{
+            id: 3,
+            name: 'Luke Skywalker',
+            phoneNumber: '+85462150315',
+            image: 'https://static.life.ru/posts/2016/03/188513/gr/north/f08a863fe5aaa858fc480e175eb4eff5__1440x.png'
+
+         },{
+            id: 4,
+            name: 'Chewbacca',
+            phoneNumber: '+95313353533',
+            image: 'http://s59.radikal.ru/i165/0901/5b/5c948c2e25d9.jpg'
+
+          }
+        ];
+
+        var Contact = React.createClass({
+            render: function () {
+                return (
+                        <li className="contact">
+                            <img className="contact-image" src={this.props.image} width="60px" height="60px"/>
+                            <div className="contact-name">{this.props.name}</div>
+                            <br/>
+                            <div className="contact-number">{this.props.phoneNumber}</div>
+                        </li>
+                        );
+            }
+        });
+        var ContactsList = React.createClass({
+            render: function () {
+            return (
+                    <div>
+                        <ul>
+                            {
+                                    CONTACTS.map(function (el) {
+                                        return <Contact
+                                                key={el.id}
+                                                name={el.name}
+                                                phoneNumber={el.phoneNumber}
+                                                image={el.image}/>;
+                                    })
+                            }
+                        </ul>
+                    </div>
+            );
+            }
+        });
+        ReactDOM.render(
+                <ContactsList/>,
+                document.getElementById("content")
+        )
+
+    </script>
+
+</body>
+</html>
